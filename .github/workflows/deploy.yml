@@ -11,13 +11,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-- name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Manual Theme Install
+      - name: Install Ananke Theme
         run: |
+          mkdir -p themes
           rm -rf themes/ananke
           git clone https://github.com/theNewDynamic/hugo-theme-ananke.git themes/ananke
 
@@ -26,7 +27,7 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install AI Dependencies
+      - name: Install OpenAI
         run: pip install openai
 
       - name: Run AI Blog Generator
@@ -40,11 +41,7 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
-      - name: Build with Hugo
-        run: hugo --minify
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+      - name: Build and Deploy
+        run: |
+          hugo --minify
+          npx peaceiris/actions-gh-pages@v3 --github_token ${{ secrets.GITHUB_TOKEN }} --publish_dir ./public
