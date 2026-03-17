@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Ananke Theme
+      - name: Setup Theme
         run: |
           mkdir -p themes
           rm -rf themes/ananke
@@ -30,7 +30,7 @@ jobs:
       - name: Install OpenAI
         run: pip install openai
 
-      - name: Run AI Blog Generator
+      - name: Generate Posts
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python scripts/generate_blog.py
@@ -42,6 +42,7 @@ jobs:
           extended: true
 
       - name: Build and Deploy
-        run: |
-          hugo --minify
-          npx peaceiris/actions-gh-pages@v3 --github_token ${{ secrets.GITHUB_TOKEN }} --publish_dir ./public
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
