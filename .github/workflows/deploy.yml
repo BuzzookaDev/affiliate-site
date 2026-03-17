@@ -11,11 +11,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+- name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
           fetch-depth: 0
+
+      - name: Manual Theme Install
+        run: |
+          rm -rf themes/ananke
+          git clone https://github.com/theNewDynamic/hugo-theme-ananke.git themes/ananke
 
       - name: Setup Python
         uses: actions/setup-python@v5
