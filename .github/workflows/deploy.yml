@@ -16,11 +16,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Theme
+      - name: Setup Theme (Ananke)
         run: |
           mkdir -p themes
-          rm -rf themes/ananke
-          git clone https://github.com/theNewDynamic/hugo-theme-ananke.git themes/ananke
+          cd themes
+          git clone --depth=1 https://github.com/theNewDynamic/gohugo-theme-ananke.git ananke
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -30,7 +30,7 @@ jobs:
       - name: Install OpenAI
         run: pip install openai
 
-      - name: Generate Posts
+      - name: Generate AI Posts
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python scripts/generate_blog.py
