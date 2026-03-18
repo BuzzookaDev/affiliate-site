@@ -33,7 +33,10 @@ jobs:
       - name: Generate AI Posts
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python scripts/generate_blog.py
+        run: |
+          python scripts/generate_blog.py
+          echo "Checking generated files:"
+          ls -R content/posts/ || echo "No posts found yet"
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
