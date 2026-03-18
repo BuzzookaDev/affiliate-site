@@ -35,14 +35,17 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python scripts/generate_blog.py
 
-      - name: Setup Hugo
+- name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
 
+      - name: Hugo Build
+        run: hugo --minify --baseURL https://buzzookadev.github.io/affiliate-site/
+
       - name: Build and Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./public
