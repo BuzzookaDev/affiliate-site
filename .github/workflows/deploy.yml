@@ -42,7 +42,7 @@ jobs:
           extended: true
 
       - name: Hugo Build
-        run: hugo --minify --baseURL https://buzzookadev.github.io/affiliate-site/
+        run: hugo --minify --buildDrafts --baseURL https://buzzookadev.github.io/affiliate-site/
 
       - name: Build and Deploy
         uses: peaceiris/actions-gh-pages@v3
