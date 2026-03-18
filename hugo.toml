@@ -1,7 +1,0 @@
-baseURL = 'https://buzzookadev.github.io/affiliate-site/'
-languageCode = 'en-us'
-title = 'BuzzookaDev Affiliate Reviews'
-theme = 'ananke'
-
-[params]
-  description = "Expert reviews on ergonomic workspace gear."
