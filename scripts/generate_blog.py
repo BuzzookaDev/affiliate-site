@@ -2,6 +2,7 @@ import os
 import csv
 from openai import OpenAI
 
+# Initialize OpenAI
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 csv_name = 'products.csv'
@@ -12,7 +13,13 @@ if not os.path.exists(csv_name):
 def generate_post(name, link, category, target, pain_point):
     print(f"🚀 AI is writing for: {name}...")
     try:
-        # We combine your columns into a prompt for the AI
+        # Create a dynamic image search based on Category + 'desk'
+        # This ensures the photos always look like a workspace setup
+        img_query = category.lower().replace(' ', ',')
+        featured_img = f"https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=1000&q=80" 
+        # Note: Unsplash Source is retiring, so we'll use a high-quality fallback 
+        # or a keyword-based redirect that Hugo's Ananke theme loves.
+        
         prompt_context = f"Category: {category}. Target Audience: {target}. Solving this problem: {pain_point}."
         
         response = client.chat.completions.create(
@@ -27,8 +34,10 @@ def generate_post(name, link, category, target, pain_point):
         os.makedirs("content/posts", exist_ok=True)
         filename = f"content/posts/{name.lower().replace(' ', '-')}.md"
         
+        # We add 'featured_image' to the Front Matter for the Ananke theme
         with open(filename, "w", encoding="utf-8") as f:
-            f.write(f"---\ntitle: '{name}'\ndate: 2026-03-18\ndraft: false\n---\n\n{content}")
+            f.write(f"+++\ntitle = '{name}'\ndate = 2026-03-18\nfeatured_image = 'https://loremflickr.com/1200/600/{img_query},office'\ndraft = false\n+++\n\n{content}")
+        
         print(f"✅ Success: {filename}")
     except Exception as e:
         print(f"❌ OpenAI Error: {e}")
@@ -36,7 +45,6 @@ def generate_post(name, link, category, target, pain_point):
 # Read CSV and run
 with open(csv_name, mode='r', encoding='utf-8-sig') as file:
     reader = csv.DictReader(file)
-    # Cleaning headers to match your CSV screenshot exactly
     reader.fieldnames = [field.strip().lower().replace(" ", "_") for field in reader.fieldnames]
     
     for row in reader:
@@ -48,5 +56,3 @@ with open(csv_name, mode='r', encoding='utf-8-sig') as file:
         
         if name:
             generate_post(name, link, cat, target, pain)
-        else:
-            print(f"⚠️ Skipping row: {row}")
