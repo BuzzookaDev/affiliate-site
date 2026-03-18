@@ -11,3 +11,8 @@ theme = 'ananke'
   name = "Reviews"
   url = "/posts/"
   weight = 10
+  [outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  mainSections = ["posts"]
