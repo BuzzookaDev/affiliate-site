@@ -11,6 +11,7 @@ theme = 'ananke'
   recent_posts_number = 10
   mainSections = ["posts"]
   google_verification = "O59W1Xupc214SKYS9k4Z_DkUp6orEHtmvNJLTDMDnxc"
+  footer_disclosure = "As an Amazon Associate, I earn from qualifying purchases. This helps support our ergonomic research at no extra cost to you."
 
 [[menu.main]]
   name = "Reviews"
