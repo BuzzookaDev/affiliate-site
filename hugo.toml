@@ -4,10 +4,9 @@ title = 'BuzzookaDev Affiliate Reviews'
 theme = 'ananke'
 
 [params]
-[params]
-  featured_image = "/images/gohugo-default-sample-hero-image.jpg"
-  recent_posts_number = 10
   description = "Expert reviews on ergonomic workspace gear."
+  recent_posts_number = 10
+
 [[menu.main]]
   name = "Reviews"
   url = "/posts/"
