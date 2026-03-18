@@ -8,3 +8,7 @@ theme = 'ananke'
   featured_image = "/images/gohugo-default-sample-hero-image.jpg"
   recent_posts_number = 10
   description = "Expert reviews on ergonomic workspace gear."
+[[menu.main]]
+  name = "Reviews"
+  url = "/posts/"
+  weight = 10
