@@ -3,16 +3,15 @@ languageCode = 'en-us'
 title = 'BuzzookaDev Affiliate Reviews'
 theme = 'ananke'
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [params]
   description = "Expert reviews on ergonomic workspace gear."
   recent_posts_number = 10
+  mainSections = ["posts"]
 
 [[menu.main]]
   name = "Reviews"
   url = "/posts/"
   weight = 10
-  [outputs]
-  home = ["HTML", "RSS", "JSON"]
-
-[params]
-  mainSections = ["posts"]
