@@ -10,6 +10,7 @@ theme = 'ananke'
   description = "Expert reviews on ergonomic workspace gear."
   recent_posts_number = 10
   mainSections = ["posts"]
+  google_verification = "O59W1Xupc214SKYS9k4Z_DkUp6orEHtmvNJLTDMDnxc"
 
 [[menu.main]]
   name = "Reviews"
